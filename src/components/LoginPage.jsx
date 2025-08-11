@@ -29,7 +29,7 @@ function LoginPage() {
             });
             const data = await response.json();
             if(!response.ok) {
-                setError(data.message || data.error);
+                setError("Incorrect Username or Password");
                 return;
             }
             const {token} = data;
@@ -41,21 +41,54 @@ function LoginPage() {
 
     return (
     <>
-        <HomeButton></HomeButton>
-        {error && (
-            <div>
-                {error}
+        <div className='home vh-100' style={{backgroundColor: '#9de1fcff'}}>
+            <nav className='navbar navbar-dark px-4 bg-dark'>
+                <div className='navbar-brand fs-2'>Blog Manager</div>
+                <HomeButton></HomeButton>
+            </nav>
+            <div className='p-3 h-75'>
+                <div className="row justify-content-center align-items-center">
+                    {error && (
+                        <ul className='list-group text-center w-25 align-items-center fs-6'>
+                            <li className='list-group-item list-group-item-warning'>
+                                <span class="badge bg-danger rounded-pill me-3 fs-6">⚠️</span>
+                                {error}
+                            </li>
+                        </ul>
+                    )}
+                </div>
+                <form onSubmit={handleLogin}>
+                    <div className="row mb-3 justify-content-center">
+                        <div className="col-sm-5">
+                            <label for="email" class="form-label col-form-label-lg">Email</label>
+                            <input className='form-control form-control-lg'
+                            type="email" placeholder="Email" required id='email'
+                            onChange={e => setUsername(e.target.value)} value={username}/>
+                        </div>
+                    </div>
+                    <div className="row mb-3 justify-content-center">
+                        <div className="col-sm-5">
+                            <label for="password" class="form-label col-form-label-lg">Password</label>
+                            <input className='form-control form-control-lg'
+                            type="password" placeholder="Password" required id='password'
+                            onChange={e => setPassword(e.target.value)} value={password}/>
+                        </div>
+                    </div>
+                    <div className="row mb-3 justify-content-center text-center">
+                        <div className="col-sm-2">
+                            <button type='submit' className='btn btn-primary btn-lg'>Log In</button>
+                        </div>
+                    </div>
+                    <div className="row justify-content-center text-center mt-4">
+                        <div className='col-sm-12 d-flex gap-1 flex-column fs-5'>
+                            Don't Have an Account?
+                            <Link to='/sign-up' className="errorLink btn btn-link btn-lg">
+                                Sign up Here!
+                            </Link>
+                        </div>
+                    </div>
+                </form>
             </div>
-        )}
-        <form onSubmit={handleLogin}>
-            <input type="email" placeholder="Email" required 
-            onChange={e => setUsername(e.target.value)} value={username}/>
-            <input type="password" placeholder="Password" required
-            onChange={e => setPassword(e.target.value)} value={password}/>
-            <button type='submit'>Log In</button>
-        </form>
-        <div>Don't Have an Account? 
-            <Link to='/sign-up' className="errorLink"> Sign up Here!</Link>
         </div>
     </>
     );

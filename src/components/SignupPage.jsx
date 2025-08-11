@@ -47,25 +47,64 @@ function SignupPage() {
 
     return (
     <>
-        <HomeButton></HomeButton>
-        {errors.length != 0 && (
-            <ul>
-                {errors.map((error, index) => {
-                    return (
-                        <li key={index}>{error.msg}</li>
-                    );
-                })}
-            </ul>
-        )}
-        <form onSubmit={handleSignup}>
-            <input type="email" placeholder="Email" required 
-            onChange={e => setUsername(e.target.value)} value={username}/>
-            <input type="password" placeholder="Password" required
-            onChange={e => setPassword(e.target.value)} value={password}/>
-            <input type="password" placeholder="Confirm Password" required
-            onChange={e => setConfirmPassword(e.target.value)} value={confirmPassword}/>
-            <button type='submit'>Sign Up</button>
-        </form>
+        <div className='home vh-100' style={{backgroundColor: '#9de1fcff'}}>
+            <nav className='navbar navbar-dark px-4 bg-dark'>
+                <div className='navbar-brand fs-2'>Blog Manager</div>
+                <HomeButton></HomeButton>
+            </nav>
+            <div className='p-3 h-75'>
+                <div className="row justify-content-center">
+                    {errors.length != 0 && (
+                        <ul className='overflow-auto list-group text-start w-25'>
+                            {errors.map((error, index) => {
+                                return (
+                                    <li className='list-group-item list-group-item-warning fs-6'
+                                        key={index}>
+                                            <span class="badge bg-danger rounded-pill me-3 fs-6">⚠️</span>
+                                            {error.msg}
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    )}
+                </div>
+                <form onSubmit={handleSignup}>
+                    <div className="row mb-3 justify-content-center">
+                        <div className="col-sm-5">
+                            <label for="email" class="form-label col-form-label-lg">Email</label>
+                            <input className='form-control form-control-lg'
+                            type="email" placeholder="Email" required id='email'
+                            onChange={e => setUsername(e.target.value)} value={username}/>
+                        </div>
+                    </div>
+                    <div className="row mb-3 justify-content-center">
+                        <div className="col-sm-5">
+                            <label for="password" class="form-label col-form-label-lg">Password</label>
+                            <input className='form-control form-control-lg'
+                            type="password" placeholder="Password" required id='password'
+                            onChange={e => setPassword(e.target.value)} value={password}/>
+                        </div>
+                    </div>
+                    <div className="row mb-3 justify-content-center">
+                        <div className="col-sm-5">
+                            <label for="confirmpassword" class="form-label col-form-label-lg">
+                                Confirm Password
+                            </label>
+                            <input className='form-control form-control-lg'
+                            type="password" placeholder="Confirm Password" required id='confirmpassword'
+                            onChange={e => setConfirmPassword(e.target.value)} value={confirmPassword}/>
+                        </div>
+                    </div>
+                    <div className="row mb-3 justify-content-center text-center mt-5">
+                        <div className="col-sm-2">
+                            <button type='submit' className='btn btn-primary btn-lg'>
+                                Sign Up
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </>
     );
 }
