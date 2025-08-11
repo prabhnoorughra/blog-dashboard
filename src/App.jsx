@@ -6,7 +6,11 @@ import * as jwtDecode from 'jwt-decode';
 import LoginPage from './components/LoginPage';
 
 
-export const UserContext = createContext(null);
+export const UserContext = createContext({
+  token: null,
+  user: null,
+  changeToken: () => {},
+});
 
 export default function App() {
   const [token, setToken] = useState(() => localStorage.getItem("token"));
@@ -42,8 +46,10 @@ export default function App() {
   }, [token, setToken, setUser]);
 
   useEffect(() => {
-    if (!user?.exp) return;
-      const now = Date.now() / 1000;
+    if (!user || !user.exp) {
+      return;
+    }
+    const now = Date.now() / 1000;
     if (now >= user.exp) {
         // token has expired
         setUser(null);
