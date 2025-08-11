@@ -1,7 +1,8 @@
 import { useState, useEffect, useContext, } from 'react'
 import { UserContext } from '../App';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import NavBar from './NavBar';
 
 
 
@@ -25,36 +26,43 @@ function HomePage() {
             console.log(data);
             if(!response.ok) {
                 console.log(data.message || "Error");
-                return;
+                if(response.status === 401) {
+                    changeToken(null);
+                    navigate("/login");
+                    return;
+                } else {
+                    throw new Error("Become Author Error");
+                }
             }
             //make a user log in again after becoming an author
             changeToken(null);
+            alert("Please log in again!");
+            navigate("/login");
         } catch(err){
             console.log(err);
         }
     }
 
     return (
-    <>
-        {!token && (
-            <button onClick={() => navigate("/login")}>Log In</button>
-        )}
-
-        {token && (
-            <button onClick={handleLogOut}>Log Out</button>
+    <div className='home vh-100' style={{backgroundColor: '#9de1fcff'}}>
+       <NavBar token={token} handleLogOut={handleLogOut}></NavBar>
+        {!user && (
+            <div className='display-2 text-center d-flex h-50 justify-content-center align-items-center'>
+                Please Log In!
+            </div>
         )}
         {user && user.role != "AUTHOR" && (
-            <div>
-                <div>You are not a blog author.</div>
-                <button onClick={handleBecomeAuthor}>Become an Author Today!</button>
+            <div className='d-flex h-50 flex-column justify-content-center align-items-center
+            display-4 gap-5'>
+                <div className='text-black text-center'>You are not a blog author.</div>
+                <button className='btn btn-primary btn-lg fs-2'
+                onClick={handleBecomeAuthor}>Become an Author Today!</button>
             </div>
         )}
         {user && user.role === "AUTHOR" && (
-            <div>
-                <div>Welcome Back {user.username}</div>
-            </div>
+            <Outlet />
         )}
-    </>
+    </div>
     );
 }
 
