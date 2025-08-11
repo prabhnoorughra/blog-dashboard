@@ -100,7 +100,7 @@ function CommentList() {
         )}
         {comments.length != 0 && (
             <div className='h-75'>
-                <div className="p-2">
+                <div className="p-2 d-flex justify-content-center">
                     <button className='btn btn-primary btn-lg fs-3'
                     onClick={() => navigate(-1)} type='button'>Back</button>
                 </div>
