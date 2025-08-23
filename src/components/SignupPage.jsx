@@ -49,8 +49,10 @@ function SignupPage() {
     <>
         <div className='home vh-100' style={{backgroundColor: '#9de1fcff'}}>
             <nav className='navbar navbar-dark px-4 bg-dark'>
-                <div className='navbar-brand fs-2'>Blog Manager</div>
-                <HomeButton></HomeButton>
+                <div className='navbar-brand fs-2 cursor-pointer btn btn-link text-white' 
+                     onClick={() => navigate("/")}>
+                        Blog Manager
+                </div>
             </nav>
             <div className='p-3 h-75'>
                 <div className="row justify-content-center">

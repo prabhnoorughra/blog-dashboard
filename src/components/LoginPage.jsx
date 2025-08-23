@@ -43,15 +43,17 @@ function LoginPage() {
     <>
         <div className='home vh-100' style={{backgroundColor: '#9de1fcff'}}>
             <nav className='navbar navbar-dark px-4 bg-dark'>
-                <div className='navbar-brand fs-2'>Blog Manager</div>
-                <HomeButton></HomeButton>
+                <div className='navbar-brand fs-2 cursor-pointer btn btn-link text-white' 
+                     onClick={() => navigate("/")}>
+                        Blog Manager
+                </div>
             </nav>
             <div className='p-3 h-75'>
                 <div className="row justify-content-center align-items-center">
                     {error && (
                         <ul className='list-group text-center w-25 align-items-center fs-6'>
                             <li className='list-group-item list-group-item-warning'>
-                                <span class="badge bg-danger rounded-pill me-3 fs-6">⚠️</span>
+                                <span className="badge bg-danger rounded-pill me-3 fs-6">⚠️</span>
                                 {error}
                             </li>
                         </ul>
@@ -60,7 +62,7 @@ function LoginPage() {
                 <form onSubmit={handleLogin}>
                     <div className="row mb-3 justify-content-center">
                         <div className="col-sm-5">
-                            <label for="email" class="form-label col-form-label-lg">Email</label>
+                            <label htmlFor="email" className="form-label col-form-label-lg">Email</label>
                             <input className='form-control form-control-lg'
                             type="email" placeholder="Email" required id='email'
                             onChange={e => setUsername(e.target.value)} value={username}/>
@@ -68,7 +70,7 @@ function LoginPage() {
                     </div>
                     <div className="row mb-3 justify-content-center">
                         <div className="col-sm-5">
-                            <label for="password" class="form-label col-form-label-lg">Password</label>
+                            <label htmlFor="password" className="form-label col-form-label-lg">Password</label>
                             <input className='form-control form-control-lg'
                             type="password" placeholder="Password" required id='password'
                             onChange={e => setPassword(e.target.value)} value={password}/>

@@ -6,13 +6,12 @@ import PropTypes from 'prop-types';
 
 function NavBar({token, handleLogOut}) {
     const navigate = useNavigate();
-
-
-
-
     return(
         <nav className='navbar navbar-dark px-4 bg-dark'>
-            <div className='navbar-brand fs-2'>Blog Manager</div>
+            <div className='navbar-brand fs-2 cursor-pointer btn btn-link text-white' 
+            onClick={() => navigate("/")}>
+                Blog Manager
+            </div>
             {!token && (
                 <button className="btn btn-primary text fs-5"
                 onClick={() => navigate("/login")}>Log In</button>

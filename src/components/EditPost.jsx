@@ -135,8 +135,8 @@ function EditPost() {
             />
             <div className="row justify-content-center mt-3 gap-1">
                 <button type='submit' className='col-2 btn btn-success btn-lg'>Save</button>
-                <button className='col-2 btn btn-warning btn-lg'
-                    onClick={() => navigate(-1)}>Cancel</button>
+                <button className='col-2 btn btn-warning btn-lg' type='button'
+                    onClick={() => navigate("/", {replace: true})}>Cancel</button>
             </div>
         </form>
     </>

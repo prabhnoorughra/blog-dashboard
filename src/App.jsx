@@ -65,8 +65,10 @@ export default function App() {
 
 
   return (
-    <UserContext.Provider value={{token, changeToken, user}}>
-      <Outlet/>
-    </UserContext.Provider>
+    <div className='home vh-100 d-flex flex-column' style={{backgroundColor: '#9de1fcff'}}>
+      <UserContext.Provider value={{token, changeToken, user}}>
+        <Outlet/>
+      </UserContext.Provider>
+    </div>
   );
 }

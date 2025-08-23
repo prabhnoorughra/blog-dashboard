@@ -44,7 +44,7 @@ function HomePage() {
     }
 
     return (
-    <div className='home vh-100' style={{backgroundColor: '#9de1fcff'}}>
+    <>
        <NavBar token={token} handleLogOut={handleLogOut}></NavBar>
         {!user && (
             <div className='display-2 text-center d-flex h-50 justify-content-center align-items-center'>
@@ -60,9 +60,11 @@ function HomePage() {
             </div>
         )}
         {user && user.role === "AUTHOR" && (
-            <Outlet />
+            <div className='flex-grow-1 overflow-hidden'>
+                <Outlet />
+            </div>
         )}
-    </div>
+    </>
     );
 }
 
